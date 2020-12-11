@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Paper from '@material-ui/core/Paper';
@@ -8,14 +8,31 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Pagination from '@material-ui/lab/Pagination';
 
+import { selectQuery } from '../input/inputSlice';
 import styles from './Grid.module.css';
-import { SearchResult, selectResults } from './gridSlice';
+import {
+    cacheCurrentPage, fetchMovies, SearchResult, selectCurrentPage, selectResults, selectTotalPages
+} from './gridSlice';
 
 export function Grid() {
   const results = useSelector(selectResults);
-  const currentPage = 1;
+  const totalPages = useSelector(selectTotalPages);
+  const currentPage = useSelector(selectCurrentPage);
+  const query = useSelector(selectQuery);
+
   const dispatch = useDispatch();
+
+  const handlePaginationChange = (
+    event: ChangeEvent<unknown>,
+    page: number
+  ) => {
+    if (page === currentPage) return;
+
+    dispatch(fetchMovies({ query: query, page: page }));
+    dispatch(cacheCurrentPage(page));
+  };
 
   const getRowNumber = (resultRow: number, currentPage: number) =>
     resultRow + 1 + (currentPage - 1) * 10;
@@ -59,6 +76,11 @@ export function Grid() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={handlePaginationChange}
+      />
     </div>
   );
 }

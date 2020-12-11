@@ -14,7 +14,7 @@ export function Input() {
 
   const dispatchTitle = () => {
     if (input && input.current) {
-      dispatch(fetchMovies(input.current.value));
+      dispatch(fetchMovies({ query: input.current.value }));
       dispatch(cacheQuery(input.current.value));
     }
   };

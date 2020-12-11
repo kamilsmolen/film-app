@@ -12,8 +12,8 @@ export const PAGE_PARAM = "page";
 
 export const ID_PARAM = "i";
 
-export const buildSearchUrl = (query: string, currentPage: string = "1") =>
-  `${HOST}?${SEARCH_PARAM}=${query}&${PAGE_PARAM}=${currentPage}&${API_KEY}=${API_KEY_ID}`;
+export const buildSearchUrl = (query: string, currentPage: number = 1) =>
+  `${HOST}?${SEARCH_PARAM}=${query}&${PAGE_PARAM}=${currentPage.toString()}&${API_KEY}=${API_KEY_ID}`;
 
 export const buildIdUrl = (id: string) =>
   `${HOST}?${ID_PARAM}=${id}&${API_KEY}=${API_KEY_ID}`;
