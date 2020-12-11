@@ -60,32 +60,32 @@ There is simple functionality to add new row or delete rows, but it generates er
 
 ### Initial view
 
-![Initial view] (https://github.com/kamilsmolen/film-app/blob/master/media/init.png?raw=true 'Initial view')
+![Initial view](https://github.com/kamilsmolen/film-app/blob/master/media/init.png?raw=true)
 
 ### Results
 
-![Results] (https://github.com/kamilsmolen/film-app/blob/master/media/results.png?raw=true 'Results')
+![Results](https://github.com/kamilsmolen/film-app/blob/master/media/results.png?raw=true)
 
 ### Details
 
-![Details] (https://github.com/kamilsmolen/film-app/blob/master/media/details.png?raw=true 'Details')
+![Details](https://github.com/kamilsmolen/film-app/blob/master/media/details.png?raw=true)
 
 ### New item
 
-![New item] (https://github.com/kamilsmolen/film-app/blob/master/media/newItem.png?raw=true 'New item')
+![New item](https://github.com/kamilsmolen/film-app/blob/master/media/newItem.png?raw=true)
 
 ### Remove items
 
-![Remove items] (https://github.com/kamilsmolen/film-app/blob/master/media/remove.png?raw=true 'Remove items')
+![Remove items](https://github.com/kamilsmolen/film-app/blob/master/media/remove.png?raw=true)
 
 ### Error
 
-![Error] (https://github.com/kamilsmolen/film-app/blob/master/media/error.png?raw=true 'Error')
+![Error](https://github.com/kamilsmolen/film-app/blob/master/media/error.png?raw=true)
 
 ### Store
 
-![Store] (https://github.com/kamilsmolen/film-app/blob/master/media/store.png?raw=true 'Store')
+![Store] (https://github.com/kamilsmolen/film-app/blob/master/media/store.png?raw=true)
 
 ### Tests
 
-![Tests] (https://github.com/kamilsmolen/film-app/blob/master/media/tests.png?raw=true 'Tests')
+![Tests](https://github.com/kamilsmolen/film-app/blob/master/media/tests.png?raw=true)
