@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { RootState } from "../../app/store";
+import { fetchMovies } from "../common/fetchMovies";
+import { fetchMovieDetails } from "../common/fetchMovieDetails";
 
 interface ErrorModalState {
   isOpened: boolean;
@@ -23,6 +25,16 @@ export const errorModalSlice = createSlice({
       state.errorMessage = action.payload;
       if (action.payload !== "") state.isOpened = true;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchMovies.rejected, (state, action) => {
+      state.isOpened = true;
+      state.errorMessage = action.error.message || "";
+    });
+    builder.addCase(fetchMovieDetails.rejected, (state, action) => {
+      state.isOpened = true;
+      state.errorMessage = action.error.message || "";
+    });
   },
 });
 

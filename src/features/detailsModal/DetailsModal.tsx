@@ -10,7 +10,11 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 
-import { selectDetails, selectIsModalOpened, toggleModal } from "./modalSlice";
+import {
+  selectDetails,
+  selectIsModalOpened,
+  toggleModal,
+} from "./detailsModalSlice";
 
 export const ModalFieldsConfig = [
   "Title",
@@ -48,7 +52,7 @@ export const ModalFieldLabels = [
   "Runtime",
 ];
 
-export function Modal() {
+export function DetailsModal() {
   const details = useSelector(selectDetails);
   const isOpened = useSelector(selectIsModalOpened);
 

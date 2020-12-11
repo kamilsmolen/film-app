@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { buildSearchUrl, fetchData } from "../../api/client";
 import { RootState } from "../../app/store";
+import { fetchMovies } from "../common/fetchMovies";
 
 export interface SearchResult {
   Title?: string;
@@ -17,6 +17,7 @@ interface GridState {
   currentPage: number;
   showGrid: boolean;
   selectedItems: SearchResult[];
+  isFormModalOpened: boolean;
 }
 
 const initialState: GridState = {
@@ -25,16 +26,8 @@ const initialState: GridState = {
   currentPage: 1,
   showGrid: false,
   selectedItems: [],
+  isFormModalOpened: false,
 };
-
-export const fetchMovies = createAsyncThunk(
-  "grid/fetchMovies",
-  async ({ query, page }: { query: string; page?: number }) => {
-    const url = buildSearchUrl(query, page);
-    const response = await fetchData(url);
-    return response;
-  }
-);
 
 export const gridSlice = createSlice({
   name: "grid",
@@ -60,6 +53,9 @@ export const gridSlice = createSlice({
         ];
       }
     },
+    toggleFormModal: (state, action: PayloadAction<boolean>) => {
+      state.isFormModalOpened = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
@@ -67,13 +63,17 @@ export const gridSlice = createSlice({
       state.totalPages = Math.ceil(Number(action.payload.totalResults) / 10);
       state.showGrid = true;
     });
-    builder.addCase(fetchMovies.pending, (state, action) => {
+    builder.addCase(fetchMovies.pending, (state) => {
       state.showGrid = false;
     });
   },
 });
 
-export const { cacheCurrentPage, toggleSelectedItem } = gridSlice.actions;
+export const {
+  cacheCurrentPage,
+  toggleSelectedItem,
+  toggleFormModal,
+} = gridSlice.actions;
 
 export const selectResults = (state: RootState) => state.grid.results;
 export const selectTotalPages = (state: RootState) => state.grid.totalPages;
@@ -81,5 +81,7 @@ export const selectCurrentPage = (state: RootState) => state.grid.currentPage;
 export const selectShowGrid = (state: RootState) => state.grid.showGrid;
 export const selectSelectedItems = (state: RootState) =>
   state.grid.selectedItems;
+export const selectIsFormModalOpened = (state: RootState) =>
+  state.grid.isFormModalOpened;
 
 export default gridSlice.reducer;

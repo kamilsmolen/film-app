@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
 
 import { selectQuery } from "../input/inputSlice";
+import { fetchMovies } from "../common/fetchMovies";
 import {
   cacheCurrentPage,
-  fetchMovies,
   selectCurrentPage,
   selectTotalPages,
 } from "./gridSlice";

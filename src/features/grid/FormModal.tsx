@@ -8,24 +8,24 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { selectIsModalOpened, toggleModal } from "./formModalSlice";
 import { cacheErrorMessage } from "../errorModal/errorModalSlice";
+import { selectIsFormModalOpened, toggleFormModal } from "./gridSlice";
 
 export function FormModal() {
-  const isOpened = useSelector(selectIsModalOpened);
+  const isOpened = useSelector(selectIsFormModalOpened);
 
   const dispatch = useDispatch();
 
   const handleClickOpen = () => {
-    dispatch(toggleModal(true));
+    dispatch(toggleFormModal(true));
   };
 
   const handleClose = () => {
-    dispatch(toggleModal(false));
+    dispatch(toggleFormModal(false));
   };
 
   const handleClickAdd = () => {
-    dispatch(toggleModal(false));
+    dispatch(toggleFormModal(false));
     dispatch(
       cacheErrorMessage("You can not add new row. Functionality to be added.")
     );

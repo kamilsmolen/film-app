@@ -10,7 +10,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import { fetchMovieDetails } from "../modal/modalSlice";
 import styles from "./Grid.module.css";
 import {
   SearchResult,
@@ -21,6 +20,7 @@ import {
 } from "./gridSlice";
 import { GridToolbar } from "./GridToolbar";
 import { GridPagination } from "./GridPagination";
+import { fetchMovieDetails } from "../common/fetchMovieDetails";
 
 export function Grid() {
   const results = useSelector(selectResults);

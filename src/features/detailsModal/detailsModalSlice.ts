@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { buildIdUrl, fetchData } from "../../api/client";
 import { RootState } from "../../app/store";
+import { fetchMovieDetails } from "../common/fetchMovieDetails";
 
 export interface Ratings {
   source: string;
@@ -36,27 +36,18 @@ export interface FilmDetails {
   imdbVotes: string;
 }
 
-interface ModalState {
+interface DetailsModalState {
   details?: FilmDetails;
   isOpened: boolean;
 }
 
-const initialState: ModalState = {
+const initialState: DetailsModalState = {
   details: undefined,
   isOpened: false,
 };
 
-export const fetchMovieDetails = createAsyncThunk(
-  "grid/fetchMovieDetails",
-  async (id: string) => {
-    const url = buildIdUrl(id);
-    const response = await fetchData(url);
-    return response;
-  }
-);
-
-export const modalSlice = createSlice({
-  name: "modal",
+export const detailsModalSlice = createSlice({
+  name: "detailsModal",
   initialState,
   reducers: {
     toggleModal: (state, action: PayloadAction<boolean>) => {
@@ -71,9 +62,10 @@ export const modalSlice = createSlice({
   },
 });
 
-export const { toggleModal } = modalSlice.actions;
+export const { toggleModal } = detailsModalSlice.actions;
 
-export const selectDetails = (state: RootState) => state.modal.details;
-export const selectIsModalOpened = (state: RootState) => state.modal.isOpened;
+export const selectDetails = (state: RootState) => state.detailsModal.details;
+export const selectIsModalOpened = (state: RootState) =>
+  state.detailsModal.isOpened;
 
-export default modalSlice.reducer;
+export default detailsModalSlice.reducer;
