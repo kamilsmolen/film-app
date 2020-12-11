@@ -1,44 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Film search application
 
-## Available Scripts
+This is application to query films by title from OMDb api (http://www.omdbapi.com/). Application displays basic results (10 per page).
 
-In the project directory, you can run:
+If you need more details, click on details row. It will open modal with detailed info (detailed info is got by query)
 
-### `yarn start`
+If you want to change page - on the bottom there is pagination section, which will run another query to get data.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+There is simple functionality to add new row or delete rows, but it generates error dialog.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## How to run app?
 
-### `yarn test`
+1. Clone repository.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies:
 
-### `yarn build`
+   > `$ npm i`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Run application:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+   > `$ npm start`
+   > App will be run on port `3000` -> `http://localhost:3000/`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   > To build prod version:
+   > `$ npm build`
 
-### `yarn eject`
+   > To run tests:
+   > `$ npm test`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Flow of the application
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Initially application displays search input - this is a place where user types title.
+2. When users put data and press enter/click search fetch `by search` starts (to read more about fetching `by search` - visit http://www.omdbapi.com/).
+3. When data loaded - they are displayed in grid on table. If fetching error occurred - error message displayed to user in dialog window.
+4. User can use pagination to switch pages. It will generate new fetch request.
+5. To get more details about film, user needs to click on row. It will generate fetch to api `by id` with provided imdbId.
+6. After fetching data - modal is open. To close modal - click outside modal or any of close buttons.
+7. User can add new data by clicking `add new` button. It will open dialog window with possibility of inputing basic film details. When submitting - dialog modal with error will appear (this functionality is not done).
+8. User can delete data by selecting rows they want to remove and clicking `remove icon`. Currently clicking it will generate dialog modal with error (this functionality is not done).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Additional information
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. If data fetch fails, retry fetch up to 2 times.
+2. Store & project structure is created in `ducks` pattern. It means each feature has its own directory inside `src/features` - each of them has its own store and components.
+3. Stores are combined in `app` directory.
+4. There is one directory in `features` called `common` which contains logic for creating async thunks. Actions of it are cross-features.
+5. Logic for fetching data, building query & urls is inside `src/api`.
+6. Basic tests are done for redux slices/ducks.
+7. Project was started with `create-react-app`.
 
-## Learn More
+## TODO
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Improve code structure and separate some parts outside of files.
+2. (If it would be possible), finish add/remove functionality.
+3. Improve adding-new-item functionality by adding more form inputs and validation to them.
+4. Improve styling (especially dialog window with details). Take care of mobile devices.
+5. Improve test coverage.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Screenshots
