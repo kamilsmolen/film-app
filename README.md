@@ -57,3 +57,35 @@ There is simple functionality to add new row or delete rows, but it generates er
 5. Improve test coverage.
 
 ## Screenshots
+
+### Initial view
+
+![Initial view] (https://github.com/kamilsmolen/film-app/blob/master/media/init.png?raw=true 'Initial view')
+
+### Results
+
+![Results] (https://github.com/kamilsmolen/film-app/blob/master/media/results.png?raw=true 'Results')
+
+### Details
+
+![Details] (https://github.com/kamilsmolen/film-app/blob/master/media/details.png?raw=true 'Details')
+
+### New item
+
+![New item] (https://github.com/kamilsmolen/film-app/blob/master/media/newItem.png?raw=true 'New item')
+
+### Remove items
+
+![Remove items] (https://github.com/kamilsmolen/film-app/blob/master/media/remove.png?raw=true 'Remove items')
+
+### Error
+
+![Error] (https://github.com/kamilsmolen/film-app/blob/master/media/error.png?raw=true 'Error')
+
+### Store
+
+![Store] (https://github.com/kamilsmolen/film-app/blob/master/media/store.png?raw=true 'Store')
+
+### Tests
+
+![Tests] (https://github.com/kamilsmolen/film-app/blob/master/media/tests.png?raw=true 'Tests')
