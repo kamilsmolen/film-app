@@ -2,10 +2,13 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import FormInput from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
 
-import { cacheQuery } from "./inputSlice";
 import { fetchMovies } from "../common/fetchMovies";
+import styles from "./Input.module.css";
+import { cacheQuery } from "./inputSlice";
 
 export function Input() {
   const input = useRef<HTMLInputElement | null>(null);
@@ -31,18 +34,23 @@ export function Input() {
   };
 
   return (
-    <div>
-      <form noValidate autoComplete="off">
-        <TextField
-          inputRef={input}
-          id="standard-basic"
-          label="Title"
+    <div className={styles.inputContainer}>
+      <FormControl fullWidth>
+        <InputLabel htmlFor="standard-adornment-amount" color="primary">
+          Title
+        </InputLabel>
+        <FormInput
+          id="standard-adornment-amount"
           onKeyPress={handleKeyPress}
+          inputRef={input}
+          color="primary"
         />
-        <Button variant="contained" onClick={handleClick}>
+      </FormControl>
+      <div className={styles.searchButton}>
+        <Button variant="outlined" color="primary" onClick={handleClick}>
           Search
         </Button>
-      </form>
+      </div>
     </div>
   );
 }

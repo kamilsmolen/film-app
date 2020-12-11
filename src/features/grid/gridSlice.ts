@@ -42,7 +42,9 @@ export const gridSlice = createSlice({
         .map((item) => item.imdbID)
         .indexOf(action.payload);
       if (selectedItemsIndex !== -1) {
-        state.selectedItems = state.selectedItems.splice(selectedItemsIndex, 1);
+        state.selectedItems = state.selectedItems.filter(
+          (item) => item.imdbID !== action.payload
+        );
       } else {
         const newItemIndex = state.results
           .map((item) => item.imdbID)

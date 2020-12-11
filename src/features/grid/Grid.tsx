@@ -1,6 +1,7 @@
 import React, { SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import Checkbox from "@material-ui/core/Checkbox";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,19 +9,18 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Checkbox from "@material-ui/core/Checkbox";
 
+import { fetchMovieDetails } from "../common/fetchMovieDetails";
 import styles from "./Grid.module.css";
+import { GridPagination } from "./GridPagination";
 import {
   SearchResult,
   selectResults,
-  selectShowGrid,
   selectSelectedItems,
+  selectShowGrid,
   toggleSelectedItem,
 } from "./gridSlice";
 import { GridToolbar } from "./GridToolbar";
-import { GridPagination } from "./GridPagination";
-import { fetchMovieDetails } from "../common/fetchMovieDetails";
 
 export function Grid() {
   const results = useSelector(selectResults);
@@ -58,10 +58,10 @@ export function Grid() {
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell align="right"></TableCell>
-              <TableCell align="right">Title</TableCell>
-              <TableCell align="right">Year</TableCell>
-              <TableCell align="right">Type</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Year</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -78,19 +78,20 @@ export function Grid() {
                         handleRowClick(result.imdbID)
                       );
                     }}
+                    className={styles.gridRow}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
                         checked={isSelected}
                         onChange={() => handleCheckboxChange(result.imdbID)}
+                        color="primary"
                       />
                     </TableCell>
-                    <TableCell component="th" scope="row" align="right">
-                      {renderPoster(result)}
-                    </TableCell>
-                    <TableCell align="right">{result.Title}</TableCell>
-                    <TableCell align="right">{result.Year}</TableCell>
-                    <TableCell align="right">{result.Type}</TableCell>
+
+                    <TableCell>{result.Title}</TableCell>
+                    <TableCell>{result.Year}</TableCell>
+                    <TableCell>{result.Type}</TableCell>
+                    <TableCell>{renderPoster(result)}</TableCell>
                   </TableRow>
                 );
               })}

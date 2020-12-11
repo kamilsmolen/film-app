@@ -10,6 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 
+import styles from "./DetailsModal.module.css";
 import {
   selectDetails,
   selectIsModalOpened,
@@ -63,13 +64,17 @@ export function DetailsModal() {
   };
 
   const renderModalBody = () => (
-    <div>
+    <div className={styles.modalBodyGrid}>
       <TableContainer component={Paper}>
         <Table size="small" aria-label="a dense table">
           <TableBody>
             {ModalFieldsConfig.map((field, key) => (
               <TableRow key={key}>
-                <TableCell component="th" scope="row">
+                <TableCell
+                  component="th"
+                  scope="row"
+                  className={styles.modalBodyLabel}
+                >
                   {ModalFieldLabels[key]}
                 </TableCell>
                 <TableCell component="th" scope="row">
@@ -81,9 +86,9 @@ export function DetailsModal() {
         </Table>
       </TableContainer>
 
-      <div>
+      <div className={styles.imageContainer}>
         <img
-          className="modal-body-image-size"
+          className={styles.imageSize}
           src={details ? details.Poster : ""}
           alt={details ? details.Title : ""}
         />

@@ -1,0 +1,6 @@
+.deleteSection {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

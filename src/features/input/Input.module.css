@@ -1,0 +1,11 @@
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 16px;
+}
+
+.searchButton {
+  margin-left: 32px;
+  align-self: flex-end;
+  max-height: 36px;
+}

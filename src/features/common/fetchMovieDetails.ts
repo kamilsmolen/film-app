@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { fetchData, buildIdUrl } from "../../api/client";
+import { buildIdUrl, fetchData } from "../../api/client";
 
 export const fetchMovieDetails = createAsyncThunk(
   "grid/fetchMovieDetails",

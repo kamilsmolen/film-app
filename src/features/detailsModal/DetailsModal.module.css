@@ -1,0 +1,19 @@
+.modalBodyGrid {
+  margin: 32px;
+}
+
+.modalBodyLabel {
+  font-weight: bold;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32px;
+}
+
+.imageSize {
+  min-width: 180px;
+  height: auto;
+}

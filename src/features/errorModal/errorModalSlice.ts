@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { RootState } from "../../app/store";
-import { fetchMovies } from "../common/fetchMovies";
 import { fetchMovieDetails } from "../common/fetchMovieDetails";
+import { fetchMovies } from "../common/fetchMovies";
 
 interface ErrorModalState {
   isOpened: boolean;

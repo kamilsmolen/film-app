@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Pagination from "@material-ui/lab/Pagination";
 
-import { selectQuery } from "../input/inputSlice";
 import { fetchMovies } from "../common/fetchMovies";
+import { selectQuery } from "../input/inputSlice";
+import styles from "./GridPagination.module.css";
 import {
   cacheCurrentPage,
   selectCurrentPage,
@@ -29,10 +30,14 @@ export function GridPagination() {
   };
 
   return (
-    <Pagination
-      count={totalPages}
-      page={currentPage}
-      onChange={handlePaginationChange}
-    />
+    <div className={styles.paginationContainer}>
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={handlePaginationChange}
+        variant="outlined"
+        color="primary"
+      />
+    </div>
   );
 }
