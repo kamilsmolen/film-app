@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { buildIdUrl, fetchData } from '../../api/client';
-import { RootState } from '../../app/store';
+import { buildIdUrl, fetchData } from "../../api/client";
+import { RootState } from "../../app/store";
 
 export interface Ratings {
   source: string;

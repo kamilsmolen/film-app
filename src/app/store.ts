@@ -1,9 +1,9 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 
-import counterReducer from '../features/counter/counterSlice';
-import gridReducer from '../features/grid/gridSlice';
-import inputReducer from '../features/input/inputSlice';
-import modalReducer from '../features/modal/modalSlice';
+import counterReducer from "../features/counter/counterSlice";
+import gridReducer from "../features/grid/gridSlice";
+import inputReducer from "../features/input/inputSlice";
+import modalReducer from "../features/modal/modalSlice";
 
 export const store = configureStore({
   reducer: {

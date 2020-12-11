@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
-import { fetchMovies } from '../grid/gridSlice';
-import { cacheQuery } from './inputSlice';
+import { fetchMovies } from "../grid/gridSlice";
+import { cacheQuery } from "./inputSlice";
 
 export function Input() {
   const input = useRef<HTMLInputElement | null>(null);
