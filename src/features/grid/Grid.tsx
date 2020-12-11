@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Pagination from '@material-ui/lab/Pagination';
 
 import { selectQuery } from '../input/inputSlice';
+import { fetchMovieDetails } from '../modal/modalSlice';
 import styles from './Grid.module.css';
 import {
     cacheCurrentPage, fetchMovies, SearchResult, selectCurrentPage, selectResults, selectTotalPages
@@ -32,6 +33,10 @@ export function Grid() {
 
     dispatch(fetchMovies({ query: query, page: page }));
     dispatch(cacheCurrentPage(page));
+  };
+
+  const handleRowClick = (id: string) => {
+    dispatch(fetchMovieDetails(id));
   };
 
   const getRowNumber = (resultRow: number, currentPage: number) =>
@@ -63,7 +68,7 @@ export function Grid() {
           </TableHead>
           <TableBody>
             {results.map((result, key) => (
-              <TableRow key={key}>
+              <TableRow key={key} onClick={() => handleRowClick(result.imdbID)}>
                 <TableCell component="th" scope="row">
                   {getRowNumber(key, currentPage)}
                 </TableCell>
