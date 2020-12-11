@@ -5,6 +5,7 @@ import gridReducer from "../features/grid/gridSlice";
 import inputReducer from "../features/input/inputSlice";
 import modalReducer from "../features/modal/modalSlice";
 import formModalReducer from "../features/formModal/formModalSlice";
+import errorModalReducer from "../features/errorModal/errorModalSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     input: inputReducer,
     modal: modalReducer,
     formModal: formModalReducer,
+    errorModal: errorModalReducer,
   },
 });
 

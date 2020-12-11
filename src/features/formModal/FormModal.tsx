@@ -9,6 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { selectIsModalOpened, toggleModal } from "./formModalSlice";
+import { cacheErrorMessage } from "../errorModal/errorModalSlice";
 
 export function FormModal() {
   const isOpened = useSelector(selectIsModalOpened);
@@ -21,6 +22,13 @@ export function FormModal() {
 
   const handleClose = () => {
     dispatch(toggleModal(false));
+  };
+
+  const handleClickAdd = () => {
+    dispatch(toggleModal(false));
+    dispatch(
+      cacheErrorMessage("You can not add new row. Functionality to be added.")
+    );
   };
 
   return (
@@ -68,7 +76,7 @@ export function FormModal() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClickAdd} color="primary">
             Add
           </Button>
         </DialogActions>
