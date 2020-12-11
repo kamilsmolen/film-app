@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Paper from "@material-ui/core/Paper";
@@ -9,6 +9,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Pagination from "@material-ui/lab/Pagination";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import { selectQuery } from "../input/inputSlice";
 import { fetchMovieDetails } from "../modal/modalSlice";
@@ -21,7 +27,10 @@ import {
   selectResults,
   selectTotalPages,
   selectShowGrid,
+  selectSelectedItems,
+  toggleSelectedItem,
 } from "./gridSlice";
+import { FormModal } from "../formModal/FormModal";
 
 export function Grid() {
   const results = useSelector(selectResults);
@@ -29,6 +38,7 @@ export function Grid() {
   const currentPage = useSelector(selectCurrentPage);
   const query = useSelector(selectQuery);
   const showGrid = useSelector(selectShowGrid);
+  const selectedItems = useSelector(selectSelectedItems);
 
   const dispatch = useDispatch();
 
@@ -46,8 +56,16 @@ export function Grid() {
     dispatch(fetchMovieDetails(id));
   };
 
-  const getRowNumber = (resultRow: number, currentPage: number) =>
-    resultRow + 1 + (currentPage - 1) * 10;
+  const handleCheckboxChange = (id: string) => {
+    dispatch(toggleSelectedItem(id));
+  };
+
+  const handleDelete = () => {
+    console.log("error");
+  };
+
+  const isItemSelected = (id: string) =>
+    selectedItems.map((item) => item.imdbID).indexOf(id) !== -1;
 
   const renderPoster = (result: SearchResult) =>
     result.Poster === "N/A" ? (
@@ -60,13 +78,32 @@ export function Grid() {
       />
     );
 
-  return showGrid ? (
+  const renderToolbar = () => {
+    const selectedItemsNum = selectedItems.length;
+
+    return (
+      <Toolbar>
+        <Typography color="inherit" variant="subtitle1" component="div">
+          {selectedItemsNum} selected
+        </Typography>
+
+        <Tooltip title="Delete" onClick={handleDelete}>
+          <IconButton aria-label="delete">
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+        <FormModal />
+      </Toolbar>
+    );
+  };
+
+  const renderGrid = () => (
     <div>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
+              <TableCell></TableCell>
               <TableCell align="right"></TableCell>
               <TableCell align="right">Title</TableCell>
               <TableCell align="right">Year</TableCell>
@@ -75,20 +112,34 @@ export function Grid() {
           </TableHead>
           <TableBody>
             {results &&
-              results.map((result, key) => (
-                <TableRow
-                  key={key}
-                  onClick={() => handleRowClick(result.imdbID)}
-                >
-                  <TableCell component="th" scope="row">
-                    {getRowNumber(key, currentPage)}
-                  </TableCell>
-                  <TableCell align="right">{renderPoster(result)}</TableCell>
-                  <TableCell align="right">{result.Title}</TableCell>
-                  <TableCell align="right">{result.Year}</TableCell>
-                  <TableCell align="right">{result.Type}</TableCell>
-                </TableRow>
-              ))}
+              results.map((result, key) => {
+                const isSelected = isItemSelected(result.imdbID);
+                return (
+                  <TableRow
+                    key={key}
+                    onClick={(e: SyntheticEvent<HTMLTableRowElement>) => {
+                      const target = e.target as HTMLInputElement;
+                      return (
+                        target.tagName.toUpperCase() !== "INPUT" &&
+                        handleRowClick(result.imdbID)
+                      );
+                    }}
+                  >
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        checked={isSelected}
+                        onChange={() => handleCheckboxChange(result.imdbID)}
+                      />
+                    </TableCell>
+                    <TableCell component="th" scope="row" align="right">
+                      {renderPoster(result)}
+                    </TableCell>
+                    <TableCell align="right">{result.Title}</TableCell>
+                    <TableCell align="right">{result.Year}</TableCell>
+                    <TableCell align="right">{result.Type}</TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -98,7 +149,16 @@ export function Grid() {
         onChange={handlePaginationChange}
       />
     </div>
-  ) : (
-    <div></div>
+  );
+
+  return (
+    <div>
+      {showGrid ? (
+        <div>
+          {renderToolbar()}
+          {renderGrid()}{" "}
+        </div>
+      ) : null}
+    </div>
   );
 }

@@ -54,7 +54,7 @@ export function Modal() {
 
   const dispatch = useDispatch();
 
-  const onModalClose = () => {
+  const handleClose = () => {
     dispatch(toggleModal(false));
   };
 
@@ -90,7 +90,7 @@ export function Modal() {
   return (
     <div>
       <Dialog
-        onClose={onModalClose}
+        onClose={handleClose}
         aria-labelledby="simple-dialog-title"
         open={isOpened}
       >

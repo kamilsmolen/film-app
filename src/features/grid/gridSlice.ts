@@ -16,6 +16,7 @@ interface GridState {
   totalPages: number;
   currentPage: number;
   showGrid: boolean;
+  selectedItems: SearchResult[];
 }
 
 const initialState: GridState = {
@@ -23,6 +24,7 @@ const initialState: GridState = {
   totalPages: 0,
   currentPage: 1,
   showGrid: false,
+  selectedItems: [],
 };
 
 export const fetchMovies = createAsyncThunk(
@@ -40,6 +42,23 @@ export const gridSlice = createSlice({
   reducers: {
     cacheCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
+      state.selectedItems = [];
+    },
+    toggleSelectedItem: (state, action: PayloadAction<string>) => {
+      const selectedItemsIndex = state.selectedItems
+        .map((item) => item.imdbID)
+        .indexOf(action.payload);
+      if (selectedItemsIndex !== -1) {
+        state.selectedItems = state.selectedItems.splice(selectedItemsIndex, 1);
+      } else {
+        const newItemIndex = state.results
+          .map((item) => item.imdbID)
+          .indexOf(action.payload);
+        state.selectedItems = [
+          ...state.selectedItems,
+          state.results[newItemIndex],
+        ];
+      }
     },
   },
   extraReducers: (builder) => {
@@ -54,11 +73,13 @@ export const gridSlice = createSlice({
   },
 });
 
-export const { cacheCurrentPage } = gridSlice.actions;
+export const { cacheCurrentPage, toggleSelectedItem } = gridSlice.actions;
 
 export const selectResults = (state: RootState) => state.grid.results;
 export const selectTotalPages = (state: RootState) => state.grid.totalPages;
 export const selectCurrentPage = (state: RootState) => state.grid.currentPage;
 export const selectShowGrid = (state: RootState) => state.grid.showGrid;
+export const selectSelectedItems = (state: RootState) =>
+  state.grid.selectedItems;
 
 export default gridSlice.reducer;
